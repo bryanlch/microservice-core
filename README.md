@@ -10,7 +10,6 @@ Template backend modular, multi-entorno y multi-tenant, desarrollado con NestJS,
 - [🚀 Instalación](#installation)
 - [🏃 Ejecución](#running-the-app)
 - [📁 Estructura del Proyecto](#estructura-del-proyecto)
-- [🧪 Tests](#tests)
 - [🛡️ Seguridad](#seguridad)
 - [🗄️ Microservicios y RabbitMQ](#microservicios-y-rabbitmq)
 - [📄 Licencia](#license)
@@ -70,14 +69,6 @@ $ pnpm run start:dev
 
 # production mode
 $ pnpm run start:prod
-```
-
-## 🧪 Tests
-
-```bash
-$ pnpm run test
-$ pnpm run test:watch
-$ pnpm run test:cov
 ```
 
 ## 🛡️ Seguridad

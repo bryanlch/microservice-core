@@ -7,11 +7,11 @@ export const getRabbitMQConfig = (
 ): MicroserviceOptions => ({
   transport: Transport.RMQ,
   options: {
-    urls: [configService.get<string>('RABBITMQ_URL')],
-    queue: configService.get<string>('RABBITMQ_QUEUE'),
+    urls: [configService.get<string>('RABBITMQ_URI')],
+    queue: configService.get<string>('CORE_QUEUE'),
     queueOptions: {
-      durable: true,
+      durable: false,
     },
-    maxConnectionAttempts: 3,
+    noAck: false,
   },
 });

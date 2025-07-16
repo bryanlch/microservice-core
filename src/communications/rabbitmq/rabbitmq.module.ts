@@ -1,30 +1,40 @@
-import { Module } from '@nestjs/common';
+// rabbitmq.module.ts
+import { Module, DynamicModule } from '@nestjs/common';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RabbitmqService } from './rabbitmq.service';
 
-@Module({
-  imports: [
-    ConfigModule,
-    ClientsModule.registerAsync([
-      {
-        name: 'RABBITMQ_SERVICE',
-        imports: [ConfigModule],
-        useFactory: async (configService: ConfigService) => ({
-          transport: Transport.RMQ,
-          options: {
-            urls: [configService.get<string>('RABBITMQ_URL')],
-            queue: configService.get<string>('RABBITMQ_QUEUE'),
-            queueOptions: {
-              durable: true,
-            },
+interface RabbitMqOptions {
+  name: string;
+  queueKey: string; // e.g. 'CORE_QUEUE', 'ANOTHER_QUEUE'
+}
+
+@Module({})
+export class RabbitMqModule {
+  static register(options: RabbitMqOptions): DynamicModule {
+    const providerName = options.name;
+    const queueKey = options.queueKey;
+    return {
+      module: RabbitMqModule,
+      imports: [
+        ConfigModule,
+        ClientsModule.registerAsync([
+          {
+            name: providerName,
+            imports: [ConfigModule],
+            useFactory: async (config: ConfigService) => ({
+              transport: Transport.RMQ,
+              options: {
+                urls: [config.get<string>('RABBITMQ_URI')],
+                queue: config.get<string>(queueKey),
+                replyQueue: 'amq.rabbitmq.reply-to',
+                queueOptions: { durable: false },
+              },
+            }),
+            inject: [ConfigService],
           },
-        }),
-        inject: [ConfigService],
-      },
-    ]),
-  ],
-  providers: [RabbitmqService],
-  exports: [RabbitmqService],
-})
-export class RabbitmqModule {}
+        ]),
+      ],
+      exports: [ClientsModule], // exportas el provider
+    };
+  }
+}
