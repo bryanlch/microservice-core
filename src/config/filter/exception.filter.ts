@@ -49,11 +49,6 @@ export class ExceptionFilterMessage implements ExceptionFilter {
 
     const formattedDate = `${year}${month}${day}${hours}${minutes}${seconds}${milliseconds}`;
 
-    // const randomString = Array.from({ length: 16 }, () =>
-    //   Math.random().toString(36).charAt(2).toUpperCase(),
-    // ).join('');
-    //const traceId = `${formattedDate}-${randomString}`;
-
     return formattedDate;
   }
 

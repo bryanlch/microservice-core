@@ -15,7 +15,7 @@ import { RabbitmqAckInterceptor } from './interceptors/rabbitmq-ack.interceptor'
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
-      validationSchema,
+      //validationSchema,
     }),
     CacheModule.register({ isGlobal: true }),
     TypeOrmModule.forRootAsync(typeOrmConfig),

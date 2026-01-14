@@ -34,7 +34,7 @@ export class RabbitMqModule {
           },
         ]),
       ],
-      exports: [ClientsModule], // exportas el provider
+      exports: [ClientsModule],
     };
   }
 }
