@@ -1,7 +1,4 @@
-import {
-  MessagePattern,
-  Payload,
-} from '@nestjs/microservices';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 import { Controller } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AckAfter } from '@decorators/ack-after.decorator';

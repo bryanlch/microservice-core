@@ -9,14 +9,17 @@ const config = new DocumentBuilder()
   .setTitle('Payment Service')
   .setDescription('API for Payment Service')
   .setVersion('1.0')
-  .addBearerAuth({
-    type: 'http',
-    scheme: 'bearer',
-    bearerFormat: 'JWT',
-    in: 'header',
-    name: 'Authorization',
-    description: 'Coloca aquí tu token JWT',
-  }, 'bearer')
+  .addBearerAuth(
+    {
+      type: 'http',
+      scheme: 'bearer',
+      bearerFormat: 'JWT',
+      in: 'header',
+      name: 'Authorization',
+      description: 'Coloca aquí tu token JWT',
+    },
+    'bearer',
+  )
   .addSecurityRequirements('bearer')
   .build();
 
