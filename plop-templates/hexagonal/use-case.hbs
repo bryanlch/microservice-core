@@ -1,0 +1,17 @@
+import { Injectable, Inject } from '@nestjs/common';
+import { {{pascalCase name}}Repository } from '../../domain/ports/{{dashCase name}}.repository';
+import { {{pascalCase name}} } from '../../domain/entities/{{dashCase name}}.entity';
+
+@Injectable()
+export class Create{{pascalCase name}}UseCase {
+  constructor(
+    @Inject('{{pascalCase name}}Repository')
+    private readonly {{camelCase name}}Repository: {{pascalCase name}}Repository,
+  ) {}
+
+  async execute(data: any): Promise<{{pascalCase name}}> {
+    // Implement use case logic
+    const {{camelCase name}} = new {{pascalCase name}}(/* mapped data */);
+    return this.{{camelCase name}}Repository.save({{camelCase name}});
+  }
+}

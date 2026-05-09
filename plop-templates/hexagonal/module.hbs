@@ -1,0 +1,16 @@
+import { Module } from '@nestjs/common';
+import { {{pascalCase name}}Controller } from './infrastructure/controllers/{{dashCase name}}.controller';
+import { Create{{pascalCase name}}UseCase } from './application/use-cases/create-{{dashCase name}}.use-case';
+import { {{pascalCase name}}RepositoryImpl } from './infrastructure/adapters/{{dashCase name}}.repository.impl';
+
+@Module({
+  controllers: [{{pascalCase name}}Controller],
+  providers: [
+    Create{{pascalCase name}}UseCase,
+    {
+      provide: '{{pascalCase name}}Repository',
+      useClass: {{pascalCase name}}RepositoryImpl,
+    },
+  ],
+})
+export class {{pascalCase name}}Module {}

@@ -1,0 +1,15 @@
+import { Injectable } from '@nestjs/common';
+import { {{pascalCase name}}Repository } from '../../domain/ports/{{dashCase name}}.repository';
+import { {{pascalCase name}} } from '../../domain/entities/{{dashCase name}}.entity';
+
+@Injectable()
+export class {{pascalCase name}}RepositoryImpl implements {{pascalCase name}}Repository {
+  async save({{camelCase name}}: {{pascalCase name}}): Promise<{{pascalCase name}}> {
+    // Implement TypeORM or other ORM logic here
+    return {{camelCase name}};
+  }
+
+  async findById(id: string): Promise<{{pascalCase name}} | null> {
+    return null;
+  }
+}
