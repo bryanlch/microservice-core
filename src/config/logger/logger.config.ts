@@ -1,23 +1,26 @@
-import { utilities as nestWinstonModuleUtilities } from 'nest-winston';
-import * as winston from 'winston';
+import { Params } from 'pino-nestjs';
 
-export const winstonConfig = {
-     transports: [
-          new winston.transports.Console({
-               format: winston.format.combine(
-                    winston.format.timestamp(),
-                    nestWinstonModuleUtilities.format.nestLike('📘 App', {
-                         prettyPrint: true,
-                         colors: true,
-                    }),
-               ),
-          }),
-          new winston.transports.File({
-               filename: 'logs/error.log',
-               level: 'error',
-          }),
-          new winston.transports.File({
-               filename: 'logs/combined.log',
-          }),
-     ],
+export const loggerConfig: Params = {
+  pinoHttp: {
+    transport:
+      process.env.NODE_ENV !== 'production'
+        ? {
+            target: 'pino-pretty',
+            options: {
+              singleLine: true,
+              translateTime: 'SYS:standard',
+              ignore: 'pid,hostname',
+              colorize: true,
+            },
+          }
+        : undefined,
+
+    serializers: {
+      req: (req) => ({
+        id: req.id,
+        method: req.method,
+        url: req.url,
+      }),
+    },
+  },
 };

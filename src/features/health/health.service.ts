@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { ClientCommunicationsService } from 'src/communications/client/client-communications.service';
+import { ClientCommunicationsService } from 'src/common/communications/client/client-communications.service';
 
 // src/health/health-check.service.ts
 @Injectable()
@@ -24,7 +24,7 @@ export class HealthCheckCustomService {
       }
 
       return {
-        status: 'ok',
+        status: 'ok!',
         received: result,
       };
     } catch (error) {

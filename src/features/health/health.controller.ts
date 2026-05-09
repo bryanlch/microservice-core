@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Query } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RmqOptions, Transport } from '@nestjs/microservices';
 import {
@@ -33,7 +33,7 @@ export class HealthController {
         this.microservice.pingCheck<RmqOptions>(`rabbitmq-${name}-connection`, {
           transport: Transport.RMQ,
           options: {
-            urls: [this.configService.get<string>('RABBITMQ_URL')],
+            urls: [this.configService.get<string>('RABBITMQ_URL') || ''],
             queue: this.configService.get<string>(
               `RABBITMQ_${name.toUpperCase()}_QUEUE`,
               'default',

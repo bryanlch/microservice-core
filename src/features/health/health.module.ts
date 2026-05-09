@@ -4,7 +4,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { ConfigModule } from '@nestjs/config';
 import { HealthCheckCustomService } from './health.service';
 import { HealthCheckConsumerHandler } from './health.consumer';
-import { ClientCommunicationsModule } from 'src/communications/client/client-communications.module';
+import { ClientCommunicationsModule } from 'src/common/communications/client/client-communications.module';
 
 @Module({
   imports: [TerminusModule, ConfigModule, ClientCommunicationsModule],

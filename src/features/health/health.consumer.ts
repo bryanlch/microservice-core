@@ -1,12 +1,10 @@
 import {
-  Ctx,
   MessagePattern,
   Payload,
-  RmqContext,
 } from '@nestjs/microservices';
 import { Controller } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { AckAfter } from 'src/decorators/ack-after.decorator';
+import { AckAfter } from '@decorators/ack-after.decorator';
 
 @Controller()
 export class HealthCheckConsumerHandler {
@@ -14,7 +12,7 @@ export class HealthCheckConsumerHandler {
 
   @AckAfter()
   @MessagePattern('core-microservice')
-  handleHealthCheck(@Payload() payload: any, @Ctx() context: RmqContext) {
+  handleHealthCheck(@Payload() payload: any) {
     const now = new Date();
 
     if (!payload || !payload.timestamp) {
